@@ -2,16 +2,7 @@ FROM python:3-slim
 
 RUN apt-get update && apt-get install -y curl wget
 
-RUN mkdir -p /opt/anki && pip install anki
-
-WORKDIR /opt/sslproxy
-RUN curl -s https://api.github.com/repos/suyashkumar/ssl-proxy/releases/latest\
-  | grep "ssl-proxy-linux-amd64.tar.gz" \
-  | cut -d : -f 2,3 \
-  | tr -d \" \
-  | tail -n 1 \
-  | wget -qi -
-RUN tar xvf ssl-proxy-linux-amd64.tar.gz
+RUN mkdir -p /opt/anki && pip install -U anki
 
 COPY entrypoint.sh /opt/
 
